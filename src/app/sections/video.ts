@@ -20,7 +20,7 @@ import { WEDDING } from '../wedding';
           } @else if (w.videoUrl) {
             <video controls preload="metadata" [poster]="w.videoPoster" [src]="w.videoUrl"></video>
           } @else {
-            <img [src]="w.videoPoster" alt="Video coming soon" />
+            <img [src]="w.videoPoster" alt="Video coming soon" loading="lazy" />
             <div class="play" aria-hidden="true"><span></span></div>
           }
         </div>

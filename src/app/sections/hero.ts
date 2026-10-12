@@ -5,8 +5,9 @@ import { WEDDING } from '../wedding';
   selector: 'app-hero',
   template: `
     <section id="home" class="hero">
-      <img class="hero-bg" src="images/hero.svg" alt="" />
+      <img class="hero-bg" [src]="w.photos.hero" alt="" fetchpriority="high" />
       <div class="hero-shade"></div>
+      <div class="hero-frame"></div>
       <div class="hero-inner">
         <p class="eyebrow">You are invited!</p>
         <h1 class="names">

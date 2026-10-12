@@ -7,23 +7,28 @@ import { WEDDING } from '../wedding';
   imports: [Reveal],
   template: `
     <section id="invitation" class="section paper">
-      <div class="container narrow center" reveal>
-        <p class="kicker">Save the date</p>
-        <h2 class="script">With love &amp; joy</h2>
-        <p class="lead">{{ w.invitation }}</p>
+      <div class="container split">
+        <figure class="arch" reveal>
+          <img [src]="w.photos.arch" alt="Shirley and Den Amiel" loading="lazy" />
+        </figure>
+        <div class="split-text" reveal>
+          <p class="kicker">Save the date</p>
+          <h2 class="script">With love &amp; joy</h2>
+          <p class="lead">{{ w.invitation }}</p>
 
-        @if (!over()) {
-          <div class="countdown" role="timer" aria-label="Time until the wedding">
-            @for (u of units(); track u.label) {
-              <div class="cd-box">
-                <strong>{{ u.value }}</strong>
-                <span>{{ u.label }}</span>
-              </div>
-            }
-          </div>
-        } @else {
-          <p class="married">We're married! Thank you for celebrating with us.</p>
-        }
+          @if (!over()) {
+            <div class="countdown" role="timer" aria-label="Time until the wedding">
+              @for (u of units(); track u.label) {
+                <div class="cd-box">
+                  <strong>{{ u.value }}</strong>
+                  <span>{{ u.label }}</span>
+                </div>
+              }
+            </div>
+          } @else {
+            <p class="married">We're married! Thank you for celebrating with us.</p>
+          }
+        </div>
       </div>
     </section>
   `,

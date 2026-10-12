@@ -6,7 +6,7 @@ import { WEDDING } from '../wedding';
   selector: 'app-theme',
   imports: [Reveal],
   template: `
-    <section id="theme" class="section dark">
+    <section id="theme" class="section dark photo" [style.background-image]="'url(' + w.photos.theme + ')'">
       <div class="container narrow center">
         <header class="section-head" reveal>
           <p class="kicker">Our theme</p>
