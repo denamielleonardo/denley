@@ -35,7 +35,7 @@ import { WEDDING } from './wedding';
   `,
 })
 export class App {
-  protected readonly initials = `${WEDDING.brideFirst[0]} & ${WEDDING.groomFirst[0]}`;
+  protected readonly initials = `${WEDDING.groomFirst[0]} & ${WEDDING.brideFirst[0]}`;
   protected readonly scrolled = signal(false);
   protected readonly menu = signal(false);
   protected readonly links = [
