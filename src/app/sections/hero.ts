@@ -1,0 +1,39 @@
+import { Component } from '@angular/core';
+import { WEDDING } from '../wedding';
+
+@Component({
+  selector: 'app-hero',
+  template: `
+    <section id="home" class="hero">
+      <img class="hero-bg" src="images/hero.svg" alt="" />
+      <div class="hero-shade"></div>
+      <div class="hero-inner">
+        <p class="eyebrow">You are invited!</p>
+        <h1 class="names">
+          <span>{{ w.brideFirst }}</span>
+          <em>&amp;</em>
+          <span>{{ w.groomFirst }}</span>
+        </h1>
+        <p class="hero-sub">are getting married</p>
+        <div class="hero-meta">
+          <span>{{ dateText }}</span>
+          <i></i>
+          <span>{{ timeText }}</span>
+        </div>
+        <p class="hero-venue">{{ w.venue }}</p>
+        <a class="btn" href="#details">See the details</a>
+      </div>
+      <a class="scroll-cue" href="#invitation" aria-label="Scroll down"><span></span></a>
+    </section>
+  `,
+})
+export class Hero {
+  protected readonly w = WEDDING;
+  private readonly d = new Date(WEDDING.startISO);
+  protected readonly dateText = this.d.toLocaleDateString('en-US', {
+    month: 'long', day: 'numeric', year: 'numeric', timeZone: WEDDING.timeZone,
+  });
+  protected readonly timeText = this.d.toLocaleTimeString('en-US', {
+    hour: 'numeric', minute: '2-digit', timeZone: WEDDING.timeZone,
+  });
+}
