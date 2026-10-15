@@ -1,13 +1,13 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { WEDDING } from './wedding';
 
-/** Full-screen velvet curtain intro. Click/tap (or Enter) to open it. */
+/** Full-screen velvet curtain intro. Opens by itself after a short pause; a click/tap skips the wait. */
 @Component({
   selector: 'app-curtain',
   template: `
     @if (state() !== 'gone') {
       <div class="curtain" [class.opening]="state() === 'opening'" role="dialog" aria-modal="true"
-           aria-label="Wedding invitation. Open the curtain to enter." (click)="open()">
+           aria-label="Wedding invitation" (click)="open()">
         <div class="stage">
           <div class="drape left"></div>
           <div class="drape right"></div>
@@ -18,9 +18,6 @@ import { WEDDING } from './wedding';
             <p class="c-eyebrow">You are invited!</p>
             <p class="c-mono">D<em>&amp;</em>S</p>
             <p class="c-names">{{ w.brideFirst }} &amp; {{ w.groomFirst }}</p>
-            <button class="c-btn" type="button" (click)="open(); $event.stopPropagation()" autofocus>
-              Open the curtain
-            </button>
           </div>
         </div>
       </div>
@@ -31,14 +28,19 @@ export class Curtain {
   protected readonly w = WEDDING;
   protected readonly state = signal<'closed' | 'opening' | 'gone'>('closed');
   private timer?: ReturnType<typeof setTimeout>;
+  private autoTimer?: ReturnType<typeof setTimeout>;
+  /** Pause before the curtain opens on its own (ms). */
+  private static readonly DELAY = 2800;
 
   constructor() {
     document.body.classList.add('curtain-lock');
-    inject(DestroyRef).onDestroy(() => clearTimeout(this.timer));
+    this.autoTimer = setTimeout(() => this.open(), Curtain.DELAY);
+    inject(DestroyRef).onDestroy(() => { clearTimeout(this.timer); clearTimeout(this.autoTimer); });
   }
 
   protected open(): void {
     if (this.state() !== 'closed') return;
+    clearTimeout(this.autoTimer);
     this.state.set('opening');
     document.body.classList.add('opened');
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
