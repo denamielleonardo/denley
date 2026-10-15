@@ -30,7 +30,7 @@ export class Curtain {
   private timer?: ReturnType<typeof setTimeout>;
   private autoTimer?: ReturnType<typeof setTimeout>;
   /** Pause before the curtain opens on its own (ms). */
-  private static readonly DELAY = 2800;
+  private static readonly DELAY = 1000;
 
   constructor() {
     document.body.classList.add('curtain-lock');
