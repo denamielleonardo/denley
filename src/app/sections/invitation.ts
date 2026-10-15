@@ -9,8 +9,8 @@ import { WEDDING } from '../wedding';
   template: `
     <section id="invitation" class="section paper">
       <div class="container split">
-        <figure class="arch" reveal tilt>
-          <img [src]="w.photos.arch" alt="Shirley and Den Amiel" loading="lazy" />
+        <figure class="arch" reveal>
+          <img [src]="w.photos.arch" alt="Shirley and Den" loading="lazy" />
         </figure>
         <div class="split-text" reveal>
           <p class="kicker">Save the date</p>

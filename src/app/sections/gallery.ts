@@ -1,11 +1,10 @@
 import { Component, HostListener, signal } from '@angular/core';
 import { Reveal } from '../reveal';
-import { Tilt } from '../tilt';
 import { WEDDING } from '../wedding';
 
 @Component({
   selector: 'app-gallery',
-  imports: [Reveal, Tilt],
+  imports: [Reveal],
   template: `
     <section id="gallery" class="section paper">
       <div class="container">
@@ -16,7 +15,7 @@ import { WEDDING } from '../wedding';
 
         <div class="masonry">
           @for (p of photos; track p.src; let i = $index) {
-            <button class="tile {{ p.size }}" type="button" reveal tilt (click)="open(i)" [attr.aria-label]="'Open photo ' + (i + 1)">
+            <button class="tile {{ p.size }}" type="button" reveal (click)="open(i)" [attr.aria-label]="'Open photo ' + (i + 1)">
               <img [src]="p.src" [alt]="p.alt" loading="lazy" />
             </button>
           }

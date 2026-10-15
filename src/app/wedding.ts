@@ -3,10 +3,10 @@
  * Swap photos by dropping files in public/images/gallery and updating `gallery` below.
  */
 export const WEDDING = {
-  bride: 'Shirley Aragona',
-  groom: 'Den Amiel Leonardo',
+  bride: 'Shirley',
+  groom: 'Den',
   brideFirst: 'Shirley',
-  groomFirst: 'Den Amiel',
+  groomFirst: 'Den',
 
   // Philippine time (UTC+8). Change the offset if the venue is elsewhere.
   startISO: '2026-10-08T16:00:00+08:00',

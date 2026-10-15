@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Journey } from './journey';
 import { Reveal } from '../reveal';
 import { Tilt } from '../tilt';
 import { WEDDING } from '../wedding';
 
 @Component({
   selector: 'app-details',
-  imports: [Reveal, Tilt],
+  imports: [Reveal, Tilt, Journey],
   template: `
     <section id="details" class="section">
       <div class="container">
@@ -41,6 +42,8 @@ import { WEDDING } from '../wedding';
             @if (w.address) { <p>{{ w.address }}</p> }
           </article>
         </div>
+
+        <div reveal><app-journey /></div>
 
         <div class="map-wrap" reveal>
           <iframe title="Map to the venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
