@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Reveal } from '../reveal';
+import { Tilt } from '../tilt';
 import { WEDDING } from '../wedding';
 
 @Component({
   selector: 'app-details',
-  imports: [Reveal],
+  imports: [Reveal, Tilt],
   template: `
     <section id="details" class="section">
       <div class="container">
@@ -15,7 +16,7 @@ import { WEDDING } from '../wedding';
         </header>
 
         <div class="cards">
-          <article class="card" reveal>
+          <article class="card" reveal tilt>
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M7 2v3M17 2v3M3 9h18M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg>
             </div>
@@ -23,7 +24,7 @@ import { WEDDING } from '../wedding';
             <p class="big">{{ weekday }}</p>
             <p>{{ dateText }}</p>
           </article>
-          <article class="card" reveal>
+          <article class="card" reveal tilt>
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
             </div>
@@ -31,7 +32,7 @@ import { WEDDING } from '../wedding';
             <p class="big">{{ timeText }}</p>
             <p>Ceremony begins</p>
           </article>
-          <article class="card" reveal>
+          <article class="card" reveal tilt>
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
             </div>

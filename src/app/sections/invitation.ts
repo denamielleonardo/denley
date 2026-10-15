@@ -1,14 +1,15 @@
 import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { Reveal } from '../reveal';
+import { Tilt } from '../tilt';
 import { WEDDING } from '../wedding';
 
 @Component({
   selector: 'app-invitation',
-  imports: [Reveal],
+  imports: [Reveal, Tilt],
   template: `
     <section id="invitation" class="section paper">
       <div class="container split">
-        <figure class="arch" reveal>
+        <figure class="arch" reveal tilt>
           <img [src]="w.photos.arch" alt="Shirley and Den Amiel" loading="lazy" />
         </figure>
         <div class="split-text" reveal>
@@ -19,7 +20,7 @@ import { WEDDING } from '../wedding';
           @if (!over()) {
             <div class="countdown" role="timer" aria-label="Time until the wedding">
               @for (u of units(); track u.label) {
-                <div class="cd-box">
+                <div class="cd-box" tilt>
                   <strong>{{ u.value }}</strong>
                   <span>{{ u.label }}</span>
                 </div>

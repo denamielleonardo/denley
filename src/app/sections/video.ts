@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Reveal } from '../reveal';
+import { Tilt } from '../tilt';
 import { WEDDING } from '../wedding';
 
 @Component({
   selector: 'app-video',
-  imports: [Reveal],
+  imports: [Reveal, Tilt],
   template: `
     <section id="video" class="section">
       <div class="container narrow">
@@ -13,7 +14,7 @@ import { WEDDING } from '../wedding';
           <p class="kicker">Watch</p>
           <h2 class="script">Our Story</h2>
         </header>
-        <div class="video-frame" reveal>
+        <div class="video-frame" reveal tilt>
           @if (youtube) {
             <iframe [src]="youtube" title="Our video" allowfullscreen loading="lazy"
                     allow="accelerometer; encrypted-media; picture-in-picture"></iframe>

@@ -1,4 +1,5 @@
 import { Component, HostListener, signal } from '@angular/core';
+import { Curtain } from './curtain';
 import { Details } from './sections/details';
 import { Gallery } from './sections/gallery';
 import { Hero } from './sections/hero';
@@ -11,8 +12,9 @@ import { WEDDING } from './wedding';
 
 @Component({
   selector: 'app-root',
-  imports: [Hero, Invitation, Quote, Details, Theme, Gallery, Video, Rsvp],
+  imports: [Curtain, Hero, Invitation, Quote, Details, Theme, Gallery, Video, Rsvp],
   template: `
+    <app-curtain />
     <header class="nav" [class.solid]="scrolled()" [class.open]="menu()">
       <a class="brand" href="#home">{{ initials }}</a>
       <button class="burger" type="button" aria-label="Menu" [attr.aria-expanded]="menu()" (click)="menu.set(!menu())">
