@@ -2,8 +2,8 @@ import { Component, DestroyRef, inject } from '@angular/core';
 import { WEDDING } from './wedding';
 
 /**
- * Invisible background music. Browsers block sound until the visitor interacts with the page,
- * so it tries to start right away and otherwise starts on the first tap, click or key press.
+ * Invisible background music. It starts the moment the curtain begins to open. Browsers block sound
+ * until the visitor interacts with the page, so if that is refused it starts on the first tap, click or key press.
  * If the audio file is missing, it silently does nothing.
  */
 @Component({ selector: 'app-music', template: '' })
@@ -49,10 +49,11 @@ export class Music {
     document.addEventListener('visibilitychange', onVisibility);
 
     audio.addEventListener('error', () => { wanted = false; removeGestures(); });
-    start();
+    window.addEventListener('curtain-open', start);
 
     inject(DestroyRef).onDestroy(() => {
       removeGestures();
+      window.removeEventListener('curtain-open', start);
       document.removeEventListener('visibilitychange', onVisibility);
       audio.pause();
     });

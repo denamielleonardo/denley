@@ -56,6 +56,7 @@ export class Curtain {
     clearTimeout(this.autoTimer);
     this.state.set('opening');
     document.body.classList.add('opened');
+    window.dispatchEvent(new Event('curtain-open')); // lets the background music start
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     // 1) swing to the tied-back pose, 2) hold briefly, 3) sweep fully off to the sides, 4) remove
     this.timer = setTimeout(() => {
