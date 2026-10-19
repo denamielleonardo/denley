@@ -9,8 +9,8 @@ export const WEDDING = {
   groomFirst: 'Den',
 
   // Philippine time (UTC+8). Change the offset if the venue is elsewhere.
-  startISO: '2026-10-08T16:00:00+08:00',
-  endISO: '2026-10-08T22:00:00+08:00',
+  startISO: '2027-10-08T16:00:00+08:00',
+  endISO: '2027-10-08T22:00:00+08:00',
   timeZone: 'Asia/Manila',
 
   venue: 'Casa Beatriz Events and Resort Place',
