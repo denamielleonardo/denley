@@ -13,7 +13,7 @@ import { WEDDING } from '../wedding';
           <p class="kicker">Watch</p>
           <h2 class="script">Our Story</h2>
         </header>
-        <div class="video-frame" reveal>
+        <div class="video-frame" reveal="zoom">
           @if (youtube) {
             <iframe [src]="youtube" title="Our video" allowfullscreen loading="lazy"
                     allow="accelerometer; encrypted-media; picture-in-picture"></iframe>

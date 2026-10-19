@@ -7,7 +7,7 @@ import { Reveal } from '../reveal';
   imports: [Reveal],
   template: `
     <section class="band">
-      <blockquote reveal>
+      <blockquote reveal="zoom">
         <span class="script">Two hearts, one story</span>
         <p>&ldquo;Whatever our souls are made of, his and mine are the same.&rdquo;</p>
       </blockquote>

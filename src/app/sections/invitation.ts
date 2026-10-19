@@ -8,13 +8,13 @@ import { WEDDING } from '../wedding';
   template: `
     <section id="invitation" class="section paper">
       <div class="container split">
-        <figure class="arch" reveal>
+        <figure class="arch" reveal="zoom">
           <img [src]="w.photos.arch" alt="Shirley and Den" loading="lazy" />
         </figure>
-        <div class="split-text" reveal>
-          <p class="kicker">Save the date</p>
-          <h2 class="script">With love &amp; joy</h2>
-          <p class="lead">{{ w.invitation }}</p>
+        <div class="split-text">
+          <p class="kicker" reveal="right">Save the date</p>
+          <h2 class="script" reveal="right" [revealDelay]="150">With love &amp; joy</h2>
+          <p class="lead" reveal="right" [revealDelay]="300">{{ w.invitation }}</p>
         </div>
       </div>
     </section>

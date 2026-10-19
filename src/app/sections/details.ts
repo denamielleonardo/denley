@@ -16,9 +16,9 @@ import { Journey } from './journey';
           <h2 class="script">When &amp; Where</h2>
         </header>
 
-        <div reveal><app-clock /></div>
+        <div reveal="zoom"><app-clock /></div>
 
-        <div class="where" reveal>
+        <div class="where" reveal="rise">
           <div class="pin" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
           </div>
@@ -27,16 +27,16 @@ import { Journey } from './journey';
           @if (w.address) { <p class="addr">{{ w.address }}</p> }
         </div>
 
-        <div reveal><app-journey /></div>
+        <div reveal="left"><app-journey /></div>
 
-        <div class="map-wrap" reveal>
+        <div class="map-wrap" reveal="right">
           <iframe title="Map to the venue" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
                   [src]="mapSrc"></iframe>
         </div>
 
-        <div class="actions center" reveal>
-          <a class="btn" [href]="mapLink" target="_blank" rel="noopener">Get directions</a>
-          <button class="btn ghost" type="button" (click)="addToCalendar()">Add to calendar</button>
+        <div class="actions center">
+          <a class="btn" [href]="mapLink" target="_blank" rel="noopener" reveal="pop">Get directions</a>
+          <button class="btn ghost" type="button" (click)="addToCalendar()" reveal="pop" [revealDelay]="150">Add to calendar</button>
         </div>
       </div>
     </section>

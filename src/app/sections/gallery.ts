@@ -15,7 +15,7 @@ import { WEDDING } from '../wedding';
 
         <div class="masonry">
           @for (p of photos; track p.src; let i = $index) {
-            <button class="tile {{ p.size }}" type="button" reveal (click)="open(i)" [attr.aria-label]="'Open photo ' + (i + 1)">
+            <button class="tile {{ p.size }}" type="button" reveal="pop" [revealDelay]="(i % 4) * 110 + 60" (click)="open(i)" [attr.aria-label]="'Open photo ' + (i + 1)">
               <img [src]="p.src" [alt]="p.alt" loading="lazy" />
             </button>
           }

@@ -17,8 +17,8 @@ import { WEDDING } from '../wedding';
           <g font-family="Cormorant Garamond, Georgia, serif" font-size="17" fill="#2f2a26" text-anchor="middle">
             <text x="100" y="47">XII</text><text x="157" y="106">III</text><text x="100" y="168">VI</text><text x="43" y="106">IX</text>
           </g>
-          <g class="hand" style="transform: rotate(120deg)"><line x1="100" y1="100" x2="100" y2="58" stroke="#2f2a26" stroke-width="5" stroke-linecap="round"/></g>
-          <g class="hand"><line x1="100" y1="100" x2="100" y2="34" stroke="#2f2a26" stroke-width="3" stroke-linecap="round"/></g>
+          <g class="hand hour"><line x1="100" y1="100" x2="100" y2="58" stroke="#2f2a26" stroke-width="5" stroke-linecap="round"/></g>
+          <g class="hand min"><line x1="100" y1="100" x2="100" y2="34" stroke="#2f2a26" stroke-width="3" stroke-linecap="round"/></g>
           <g class="hand sec" [style.animation-delay.s]="-offset">
             <line x1="100" y1="116" x2="100" y2="28" stroke="#a8864a" stroke-width="1.5" stroke-linecap="round"/>
           </g>

@@ -7,12 +7,12 @@ import { WEDDING } from '../wedding';
   imports: [Reveal],
   template: `
     <section id="rsvp" class="section dark">
-      <div class="container narrow center" reveal>
-        <p class="kicker">Will you join us?</p>
-        <h2 class="script">RSVP</h2>
-        <p class="lead">{{ w.rsvpNote }}</p>
+      <div class="container narrow center">
+        <p class="kicker" reveal>Will you join us?</p>
+        <h2 class="script" reveal [revealDelay]="120">RSVP</h2>
+        <p class="lead" reveal [revealDelay]="240">{{ w.rsvpNote }}</p>
         @if (w.rsvpUrl) {
-          <a class="btn" [href]="w.rsvpUrl" target="_blank" rel="noopener">Respond now</a>
+          <a class="btn" [href]="w.rsvpUrl" target="_blank" rel="noopener" reveal="pop" [revealDelay]="360">Respond now</a>
         }
       </div>
     </section>
