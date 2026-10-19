@@ -45,6 +45,9 @@ export const WEDDING = {
     { src: 'https://picsum.photos/id/29/1200/800', alt: 'Photo 10', size: 'wide' },
   ] as { src: string; alt: string; size: 'tall' | 'wide' | 'sq' }[],
 
+  // Background music (no player is shown). Put the file in public/audio and set its path here; '' turns it off.
+  music: 'audio/forevermore.mp3',
+
   // Video: a YouTube link (https://youtu.be/...) or a file in public/videos (e.g. 'videos/our-story.mp4').
   // Leave empty to show the placeholder.
   videoUrl: '',

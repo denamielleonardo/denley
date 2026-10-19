@@ -2,6 +2,7 @@ import { Component, HostListener, signal } from '@angular/core';
 import { Curtain } from './curtain';
 import { Details } from './sections/details';
 import { Gallery } from './sections/gallery';
+import { Music } from './music';
 import { Hero } from './sections/hero';
 import { Invitation } from './sections/invitation';
 import { Quote } from './sections/quote';
@@ -11,9 +12,10 @@ import { WEDDING } from './wedding';
 
 @Component({
   selector: 'app-root',
-  imports: [Curtain, Hero, Invitation, Quote, Details, Gallery, Video, Rsvp],
+  imports: [Curtain, Music, Hero, Invitation, Quote, Details, Gallery, Video, Rsvp],
   template: `
     <app-curtain />
+    <app-music />
     <header class="nav" [class.solid]="scrolled()" [class.open]="menu()">
       <a class="brand" href="#home">{{ initials }}</a>
       <button class="burger" type="button" aria-label="Menu" [attr.aria-expanded]="menu()" (click)="menu.set(!menu())">
