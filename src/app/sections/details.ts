@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Journey } from './journey';
 import { Reveal } from '../reveal';
-import { Tilt } from '../tilt';
 import { WEDDING } from '../wedding';
+import { Clock } from './clock';
+import { Journey } from './journey';
 
 @Component({
   selector: 'app-details',
-  imports: [Reveal, Tilt, Journey],
+  imports: [Reveal, Journey, Clock],
   template: `
     <section id="details" class="section">
       <div class="container">
@@ -16,31 +16,15 @@ import { WEDDING } from '../wedding';
           <h2 class="script">When &amp; Where</h2>
         </header>
 
-        <div class="cards">
-          <article class="card" reveal tilt>
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M7 2v3M17 2v3M3 9h18M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/></svg>
-            </div>
-            <h3>Date</h3>
-            <p class="big">{{ weekday }}</p>
-            <p>{{ dateText }}</p>
-          </article>
-          <article class="card" reveal tilt>
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-            </div>
-            <h3>Time</h3>
-            <p class="big">{{ timeText }}</p>
-            <p>Ceremony begins</p>
-          </article>
-          <article class="card" reveal tilt>
-            <div class="icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-            </div>
-            <h3>Venue</h3>
-            <p class="big">{{ w.venue }}</p>
-            @if (w.address) { <p>{{ w.address }}</p> }
-          </article>
+        <div reveal><app-clock /></div>
+
+        <div class="where" reveal>
+          <div class="pin" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          </div>
+          <p class="kicker">Where</p>
+          <p class="venue-name">{{ w.venue }}</p>
+          @if (w.address) { <p class="addr">{{ w.address }}</p> }
         </div>
 
         <div reveal><app-journey /></div>
@@ -60,16 +44,8 @@ import { WEDDING } from '../wedding';
 })
 export class Details {
   protected readonly w = WEDDING;
-  private readonly d = new Date(WEDDING.startISO);
   private readonly q = encodeURIComponent(WEDDING.mapQuery);
 
-  protected readonly weekday = this.d.toLocaleDateString('en-US', { weekday: 'long', timeZone: WEDDING.timeZone });
-  protected readonly dateText = this.d.toLocaleDateString('en-US', {
-    month: 'long', day: 'numeric', year: 'numeric', timeZone: WEDDING.timeZone,
-  });
-  protected readonly timeText = this.d.toLocaleTimeString('en-US', {
-    hour: 'numeric', minute: '2-digit', timeZone: WEDDING.timeZone,
-  });
   protected readonly mapLink = `https://www.google.com/maps/search/?api=1&query=${this.q}`;
   protected readonly mapSrc = inject(DomSanitizer).bypassSecurityTrustResourceUrl(
     `https://maps.google.com/maps?q=${this.q}&output=embed`,

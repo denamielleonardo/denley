@@ -17,17 +17,6 @@ export const WEDDING = {
   address: '', // e.g. 'Brgy. Example, City, Province' (shown under the venue name when filled)
   mapQuery: 'Casa Beatriz Events and Resort Place',
 
-  theme: 'Rustic',
-  themeBlurb:
-    'Warm wood, wildflowers, twinkling lights and good company. Come as you are, dressed in the earthy tones of the countryside.',
-  dressCode: 'Earth tones: sage, terracotta, cream, dusty brown & soft gold.',
-  palette: [
-    { name: 'Sage', hex: '#7d8b6a' },
-    { name: 'Terracotta', hex: '#b5654a' },
-    { name: 'Cream', hex: '#f1e6d0' },
-    { name: 'Walnut', hex: '#6b4a35' },
-    { name: 'Gold', hex: '#b8934a' },
-  ],
 
   invitation:
     'Together with our families, we joyfully invite you to celebrate the beginning of our forever.',
@@ -40,8 +29,6 @@ export const WEDDING = {
   photos: {
     hero: 'https://picsum.photos/id/69/1920/1280',
     arch: 'https://picsum.photos/id/64/900/1200',
-    band: 'https://picsum.photos/id/28/1920/900',
-    theme: 'https://picsum.photos/id/17/1920/1100',
   },
 
   // Gallery: swap src for your own files in public/images/gallery. size: tall | wide | sq controls the mosaic.

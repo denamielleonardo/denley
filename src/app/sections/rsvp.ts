@@ -12,7 +12,7 @@ import { WEDDING } from '../wedding';
         <h2 class="script">RSVP</h2>
         <p class="lead">{{ w.rsvpNote }}</p>
         @if (w.rsvpUrl) {
-          <a class="btn light" [href]="w.rsvpUrl" target="_blank" rel="noopener">Respond now</a>
+          <a class="btn" [href]="w.rsvpUrl" target="_blank" rel="noopener">Respond now</a>
         }
       </div>
     </section>

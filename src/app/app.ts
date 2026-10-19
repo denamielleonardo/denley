@@ -6,13 +6,12 @@ import { Hero } from './sections/hero';
 import { Invitation } from './sections/invitation';
 import { Quote } from './sections/quote';
 import { Rsvp } from './sections/rsvp';
-import { Theme } from './sections/theme';
 import { Video } from './sections/video';
 import { WEDDING } from './wedding';
 
 @Component({
   selector: 'app-root',
-  imports: [Curtain, Hero, Invitation, Quote, Details, Theme, Gallery, Video, Rsvp],
+  imports: [Curtain, Hero, Invitation, Quote, Details, Gallery, Video, Rsvp],
   template: `
     <app-curtain />
     <header class="nav" [class.solid]="scrolled()" [class.open]="menu()">
@@ -31,7 +30,6 @@ import { WEDDING } from './wedding';
       <app-invitation />
       <app-quote />
       <app-details />
-      <app-theme />
       <app-gallery />
       <app-video />
       <app-rsvp />
@@ -44,7 +42,6 @@ export class App {
   protected readonly menu = signal(false);
   protected readonly links = [
     { href: '#details', label: 'Details' },
-    { href: '#theme', label: 'Theme' },
     { href: '#gallery', label: 'Gallery' },
     { href: '#video', label: 'Video' },
     { href: '#rsvp', label: 'RSVP' },
