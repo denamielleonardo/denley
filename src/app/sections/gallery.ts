@@ -43,7 +43,7 @@ export class ActiveVideo {
             @for (s of slides(); track s.photo.src) {
               <div class="slide" [class.on]="s.i === index()" [class.vid]="s.photo.video">
                 @if (s.photo.video) {
-                  <video class="fg" [src]="s.photo.src" [muted]="true" [defaultMuted]="true" playsinline preload="auto"
+                  <video class="fg" [src]="s.photo.src" [muted]="true" [defaultMuted]="true" (volumechange)="keepMuted($event)" playsinline preload="auto"
                          [active]="s.i === index() && inView()" (ended)="go(1)" (error)="go(1)"></video>
                 } @else {
                   <img class="bg" [src]="s.photo.src" alt="" aria-hidden="true" />
@@ -64,7 +64,7 @@ export class ActiveVideo {
           <button class="lb-btn close" type="button" aria-label="Close" (click)="close()">&times;</button>
           <button class="lb-btn prev" type="button" aria-label="Previous" (click)="step(-1, $event)">&#8249;</button>
           @if (all[current()!].video) {
-            <video [src]="all[current()!].src" [muted]="true" [defaultMuted]="true" controls autoplay playsinline (click)="$event.stopPropagation()"></video>
+            <video [src]="all[current()!].src" [muted]="true" [defaultMuted]="true" (volumechange)="keepMuted($event)" controls controlsList="nodownload noremoteplayback" autoplay playsinline (click)="$event.stopPropagation()"></video>
           } @else {
             <img [src]="all[current()!].src" [alt]="all[current()!].alt" (click)="$event.stopPropagation()" />
           }
@@ -119,6 +119,12 @@ export class Gallery {
     }, Gallery.INTERVAL);
 
     inject(DestroyRef).onDestroy(() => { clearInterval(timer); io?.disconnect(); });
+  }
+
+  /** Videos are always silent: if anything un-mutes one, put it straight back. */
+  protected keepMuted(e: Event): void {
+    const v = e.target as HTMLVideoElement;
+    if (!v.muted) v.muted = true;
   }
 
   protected pad(n: number): string { return n < 10 ? '0' + n : String(n); }
