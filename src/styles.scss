@@ -371,3 +371,12 @@ app-journey { display: block; margin-top: 48px; }
   .journey * { animation: none !important; }
   .journey .car { left: 30%; opacity: 1; }
 }
+
+/* ---------- monochrome mode (WEDDING.monochrome) ---------- */
+/* One filter turns everything black & white: photos, videos, the map, the drive scene and the clock. */
+html.mono { filter: grayscale(1); }
+html.mono {
+  --terracotta: #4a4a4a;   /* accents become charcoal */
+  --gold: #8f8f8f;         /* hairlines become silver */
+  --brown: #5e5e5e;
+}

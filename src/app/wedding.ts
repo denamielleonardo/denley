@@ -8,6 +8,9 @@ export const WEDDING = {
   brideFirst: 'Shirley',
   groomFirst: 'Den',
 
+  // true = black & white look for the whole site (photos and videos included); false = the champagne-gold palette.
+  monochrome: false,
+
   // Philippine time (UTC+8). Change the offset if the venue is elsewhere.
   startISO: '2027-10-08T16:00:00+08:00',
   endISO: '2027-10-08T22:00:00+08:00',

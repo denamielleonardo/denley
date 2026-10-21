@@ -37,6 +37,10 @@ import { WEDDING } from './wedding';
   `,
 })
 export class App {
+  constructor() {
+    document.documentElement.classList.toggle('mono', WEDDING.monochrome);
+  }
+
   protected readonly initials = `${WEDDING.groomFirst[0]} & ${WEDDING.brideFirst[0]}`;
   protected readonly scrolled = signal(false);
   protected readonly menu = signal(false);
