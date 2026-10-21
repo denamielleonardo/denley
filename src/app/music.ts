@@ -61,12 +61,17 @@ export class Music {
     Music.GESTURES.forEach(g => window.addEventListener(g, onGesture, { passive: true }));
     window.addEventListener('curtain-open', onGesture);
 
-    // Pause while the tab is in the background, resume when it comes back.
-    const onVisibility = () => {
-      if (failed) return;
-      if (document.hidden) audio.pause(); else audio.play().catch(() => undefined);
-    };
+    // Stop the sound as soon as the visitor leaves: tab hidden or closed, page unloaded, or frozen by the browser.
+    let wasPlaying = false;
+    const stop = () => { if (!audio.paused) { wasPlaying = true; audio.pause(); } };
+    const resume = () => { if (wasPlaying && !failed) audio.play().catch(() => undefined); wasPlaying = false; };
+    const onVisibility = () => { if (document.hidden) stop(); else resume(); };
+    const onPageShow = (e: PageTransitionEvent) => { if (e.persisted) resume(); }; // restored from back/forward cache
     document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('pagehide', stop);
+    window.addEventListener('beforeunload', stop);
+    window.addEventListener('pageshow', onPageShow);
+    document.addEventListener('freeze', stop);
 
     audio.addEventListener('error', () => { failed = true; removeGestures(); });
 
@@ -75,7 +80,13 @@ export class Music {
       removeGestures();
       window.removeEventListener('curtain-open', onGesture);
       document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('pagehide', stop);
+      window.removeEventListener('beforeunload', stop);
+      window.removeEventListener('pageshow', onPageShow);
+      document.removeEventListener('freeze', stop);
       audio.pause();
+      audio.removeAttribute('src');
+      audio.load(); // release the audio so it cannot keep playing
     });
   }
 }

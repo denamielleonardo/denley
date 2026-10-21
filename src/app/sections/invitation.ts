@@ -9,11 +9,11 @@ import { WEDDING } from '../wedding';
     <section id="invitation" class="section paper">
       <div class="container split">
         <figure class="arch" reveal="zoom">
-          <img [src]="w.photos.arch" alt="Shirley and Den" loading="lazy" />
+          <img [src]="w.photos.arch" alt="Her engagement ring, with Shirley and Den behind" loading="lazy" />
         </figure>
         <div class="split-text">
           <p class="kicker" reveal="right">Save the date</p>
-          <h2 class="script" reveal="right" [revealDelay]="150">With love &amp; joy</h2>
+          <h2 class="script long" reveal="right" [revealDelay]="150">{{ w.invitationTitle }}</h2>
           <p class="lead" reveal="right" [revealDelay]="300">{{ w.invitation }}</p>
         </div>
       </div>

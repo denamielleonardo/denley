@@ -18,32 +18,38 @@ export const WEDDING = {
   mapQuery: 'Casa Beatriz Events and Resort Place',
 
 
+  invitationTitle: "It’s finally happening!",
   invitation:
-    'Together with our families, we joyfully invite you to celebrate the beginning of our forever.',
+    "We're getting married, and it wouldn't be the same without the people who mean the most to us.",
 
   // Leave empty until you have one. A link (Google Form, Messenger, etc.) shows an RSVP button.
   rsvpUrl: '',
   rsvpNote: 'Kindly let us know if you can make it. Details coming soon.',
 
-  // Hero / section photos. Placeholders from picsum.photos: swap for your own (e.g. 'images/us.jpg').
+  // Hero / section photos: your own files live in public/images/photos.
   photos: {
-    hero: 'https://picsum.photos/id/69/1920/1280',
-    arch: 'https://picsum.photos/id/64/900/1200',
+    hero: 'images/photos/photo-06.jpg',
+    arch: 'images/photos/ring.jpg',
   },
 
-  // Gallery: swap src for your own files in public/images/gallery. size: tall | wide | sq controls the mosaic.
+  // Gallery: one frame that fades through every photo in this list, in order, forever.
+  // Add photos to public/images/photos and list them here. Clicking the frame opens a full-screen viewer.
   gallery: [
-    { src: 'https://picsum.photos/id/65/800/1200', alt: 'Photo 1', size: 'tall' },
-    { src: 'https://picsum.photos/id/17/1200/800', alt: 'Photo 2', size: 'wide' },
-    { src: 'https://picsum.photos/id/25/900/900', alt: 'Photo 3', size: 'sq' },
-    { src: 'https://picsum.photos/id/28/900/900', alt: 'Photo 4', size: 'sq' },
-    { src: 'https://picsum.photos/id/64/800/1200', alt: 'Photo 5', size: 'tall' },
-    { src: 'https://picsum.photos/id/78/900/900', alt: 'Photo 6', size: 'sq' },
-    { src: 'https://picsum.photos/id/69/1200/800', alt: 'Photo 7', size: 'wide' },
-    { src: 'https://picsum.photos/id/18/900/900', alt: 'Photo 8', size: 'sq' },
-    { src: 'https://picsum.photos/id/77/900/900', alt: 'Photo 9', size: 'sq' },
-    { src: 'https://picsum.photos/id/29/1200/800', alt: 'Photo 10', size: 'wide' },
-  ] as { src: string; alt: string; size: 'tall' | 'wide' | 'sq' }[],
+    { src: 'images/photos/photo-08.jpg', alt: 'Shirley and Den, photo 1' },
+    { src: 'images/photos/photo-06.jpg', alt: 'Shirley and Den, photo 2' },
+    { src: 'images/photos/photo-01.jpg', alt: 'Shirley and Den, photo 3' },
+    { src: 'images/photos/photo-05.jpg', alt: 'Shirley and Den, photo 4' },
+    { src: 'images/photos/photo-07.jpg', alt: 'Shirley and Den, photo 5' },
+    { src: 'images/photos/photo-02.jpg', alt: 'Shirley and Den, photo 6' },
+    { src: 'images/photos/photo-10.jpg', alt: 'Shirley and Den, photo 7' },
+    { src: 'images/photos/photo-12.jpg', alt: 'Shirley and Den, photo 8' },
+    { src: 'images/photos/photo-13.jpg', alt: 'Shirley and Den, photo 9' },
+    { src: 'images/photos/photo-11.jpg', alt: 'Shirley and Den, photo 10' },
+    { src: 'images/photos/photo-03.jpg', alt: 'Shirley and Den, photo 11' },
+    { src: 'images/photos/photo-14.jpg', alt: 'Shirley and Den, photo 12' },
+    { src: 'images/photos/photo-04.jpg', alt: 'Shirley and Den, photo 13' },
+    { src: 'images/photos/photo-15.jpg', alt: 'Shirley and Den, photo 14' },
+  ] as { src: string; alt: string }[],
 
   // Background music (no player is shown). Put the file in public/audio and set its path here; '' turns it off.
   music: 'audio/music.mp3',
@@ -51,5 +57,5 @@ export const WEDDING = {
   // Video: a YouTube link (https://youtu.be/...) or a file in public/videos (e.g. 'videos/our-story.mp4').
   // Leave empty to show the placeholder.
   videoUrl: '',
-  videoPoster: 'https://picsum.photos/id/65/1280/720',
+  videoPoster: 'images/photos/photo-06.jpg',
 };
