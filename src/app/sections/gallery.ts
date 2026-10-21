@@ -1,14 +1,34 @@
-import { Component, DestroyRef, ElementRef, HostListener, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, Directive, ElementRef, HostListener, computed, effect, inject, input, signal } from '@angular/core';
 import { Reveal } from '../reveal';
 import { WEDDING } from '../wedding';
 
+/** Plays a <video> only while `active` is true, restarting it each time it becomes active. */
+@Directive({ selector: 'video[active]' })
+export class ActiveVideo {
+  readonly active = input(false);
+
+  constructor() {
+    const el = inject<ElementRef<HTMLVideoElement>>(ElementRef).nativeElement;
+    el.muted = true;
+    effect(() => {
+      if (this.active()) {
+        el.currentTime = 0;
+        el.play().catch(() => undefined);
+      } else {
+        el.pause();
+      }
+    });
+  }
+}
+
 /**
- * One photo frame that crossfades through every photo, forever.
+ * One photo frame that crossfades through every photo and video, forever.
+ * Photos stay a few seconds; videos play to the end (muted) and then move on.
  * Clicking the frame opens a full-screen viewer to browse manually.
  */
 @Component({
   selector: 'app-gallery',
-  imports: [Reveal],
+  imports: [Reveal, ActiveVideo],
   template: `
     <section id="gallery" class="section paper">
       <div class="container">
@@ -18,18 +38,23 @@ import { WEDDING } from '../wedding';
         </header>
 
         <div class="slideshow" reveal="zoom" (mouseenter)="hover.set(true)" (mouseleave)="hover.set(false)">
-          <div class="frame" role="button" tabindex="0" [attr.aria-label]="'Open photo ' + (index() + 1) + ' of ' + all.length"
+          <div class="frame" role="button" tabindex="0" [attr.aria-label]="'Open item ' + (index() + 1) + ' of ' + all.length"
                (click)="open(index())" (keydown.enter)="open(index())">
             @for (s of slides(); track s.photo.src) {
-              <div class="slide" [class.on]="s.i === index()">
-                <img class="bg" [src]="s.photo.src" alt="" aria-hidden="true" />
-                <img class="fg" [src]="s.photo.src" [alt]="s.photo.alt" />
+              <div class="slide" [class.on]="s.i === index()" [class.vid]="s.photo.video">
+                @if (s.photo.video) {
+                  <video class="fg" [src]="s.photo.src" muted playsinline preload="auto"
+                         [active]="s.i === index() && inView()" (ended)="go(1)" (error)="go(1)"></video>
+                } @else {
+                  <img class="bg" [src]="s.photo.src" alt="" aria-hidden="true" />
+                  <img class="fg" [src]="s.photo.src" [alt]="s.photo.alt" />
+                }
               </div>
             }
             <span class="count">{{ pad(index() + 1) }} / {{ pad(all.length) }}</span>
           </div>
-          <button class="nav-btn prev" type="button" aria-label="Previous photo" (click)="go(-1)">&#8249;</button>
-          <button class="nav-btn next" type="button" aria-label="Next photo" (click)="go(1)">&#8250;</button>
+          <button class="nav-btn prev" type="button" aria-label="Previous" (click)="go(-1)">&#8249;</button>
+          <button class="nav-btn next" type="button" aria-label="Next" (click)="go(1)">&#8250;</button>
         </div>
       </div>
 
@@ -38,7 +63,11 @@ import { WEDDING } from '../wedding';
              (touchstart)="touchX = $event.touches[0].clientX" (touchend)="onSwipe($event)">
           <button class="lb-btn close" type="button" aria-label="Close" (click)="close()">&times;</button>
           <button class="lb-btn prev" type="button" aria-label="Previous" (click)="step(-1, $event)">&#8249;</button>
-          <img [src]="all[current()!].src" [alt]="all[current()!].alt" (click)="$event.stopPropagation()" />
+          @if (all[current()!].video) {
+            <video [src]="all[current()!].src" controls autoplay playsinline (click)="$event.stopPropagation()"></video>
+          } @else {
+            <img [src]="all[current()!].src" [alt]="all[current()!].alt" (click)="$event.stopPropagation()" />
+          }
           <button class="lb-btn next" type="button" aria-label="Next" (click)="step(1, $event)">&#8250;</button>
           <span class="lb-count">{{ current()! + 1 }} / {{ all.length }}</span>
         </div>
@@ -47,7 +76,7 @@ import { WEDDING } from '../wedding';
   `,
 })
 export class Gallery {
-  /** How long each photo stays on screen (ms). */
+  /** How long each photo stays on screen (ms). Videos play to their end instead. */
   private static readonly INTERVAL = 3800;
 
   protected readonly all = WEDDING.gallery;
@@ -56,10 +85,10 @@ export class Gallery {
   protected readonly current = signal<number | null>(null); // full-screen viewer
   protected touchX = 0;
 
-  private readonly inView = signal(false);
+  protected readonly inView = signal(false);
   private readonly reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /** Only the current photo and its neighbours are in the page, so a long list stays light. */
+  /** Only the current item and its neighbours are in the page, so a long list stays light. */
   protected readonly slides = computed(() => {
     const n = this.all.length;
     const i = this.index();
@@ -73,11 +102,19 @@ export class Gallery {
       ? null
       : new IntersectionObserver(([e]) => this.inView.set(e.isIntersecting), { threshold: 0.3 });
     io?.observe(el);
+    if (!io) this.inView.set(true);
 
-    // Advance only while the gallery is on screen, not hovered, and the viewer is closed.
+    // Photos advance on a timer while the gallery is on screen, not hovered, and the viewer is closed.
+    // Videos advance when they end; if one stalls, move on after ~25 seconds.
+    let stuck = 0;
+    let lastIndex = -1;
     const timer = setInterval(() => {
-      if (this.reduced || this.hover() || this.current() !== null || document.hidden) return;
-      if (io && !this.inView()) return;
+      if (this.reduced || this.hover() || this.current() !== null || document.hidden || !this.inView()) return;
+      if (this.all[this.index()].video) {
+        if (this.index() !== lastIndex) { lastIndex = this.index(); stuck = 0; }
+        if (++stuck * Gallery.INTERVAL > 25000) this.go(1);
+        return;
+      }
       this.go(1);
     }, Gallery.INTERVAL);
 
@@ -93,7 +130,7 @@ export class Gallery {
 
   protected open(i: number): void { this.current.set(i); }
   protected close(): void {
-    // Continue the slideshow from the photo that was being viewed.
+    // Continue the slideshow from the item that was being viewed.
     const c = this.current();
     if (c !== null) this.index.set(c);
     this.current.set(null);

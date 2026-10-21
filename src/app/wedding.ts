@@ -32,24 +32,30 @@ export const WEDDING = {
     arch: 'images/photos/ring.jpg',
   },
 
-  // Gallery: one frame that fades through every photo in this list, in order, forever.
-  // Add photos to public/images/photos and list them here. Clicking the frame opens a full-screen viewer.
+  // Gallery: one frame that fades through every item in this list, in order, forever.
+  // Photos go in public/images/photos, videos in public/videos (mark them video: true; they play muted to the end).
+  // Clicking the frame opens a full-screen viewer.
   gallery: [
     { src: 'images/photos/photo-08.jpg', alt: 'Shirley and Den, photo 1' },
     { src: 'images/photos/photo-06.jpg', alt: 'Shirley and Den, photo 2' },
+    { src: 'videos/clip-1.mp4', alt: 'Shirley and Den, video 1', video: true },
     { src: 'images/photos/photo-01.jpg', alt: 'Shirley and Den, photo 3' },
     { src: 'images/photos/photo-05.jpg', alt: 'Shirley and Den, photo 4' },
     { src: 'images/photos/photo-07.jpg', alt: 'Shirley and Den, photo 5' },
+    { src: 'videos/clip-2.mp4', alt: 'Shirley and Den, video 2', video: true },
     { src: 'images/photos/photo-02.jpg', alt: 'Shirley and Den, photo 6' },
     { src: 'images/photos/photo-10.jpg', alt: 'Shirley and Den, photo 7' },
+    { src: 'videos/clip-3.mp4', alt: 'Shirley and Den, video 3', video: true },
     { src: 'images/photos/photo-12.jpg', alt: 'Shirley and Den, photo 8' },
     { src: 'images/photos/photo-13.jpg', alt: 'Shirley and Den, photo 9' },
     { src: 'images/photos/photo-11.jpg', alt: 'Shirley and Den, photo 10' },
+    { src: 'videos/clip-4.mp4', alt: 'Shirley and Den, video 4', video: true },
     { src: 'images/photos/photo-03.jpg', alt: 'Shirley and Den, photo 11' },
     { src: 'images/photos/photo-14.jpg', alt: 'Shirley and Den, photo 12' },
     { src: 'images/photos/photo-04.jpg', alt: 'Shirley and Den, photo 13' },
+    { src: 'videos/clip-5.mp4', alt: 'Shirley and Den, video 5', video: true },
     { src: 'images/photos/photo-15.jpg', alt: 'Shirley and Den, photo 14' },
-  ] as { src: string; alt: string }[],
+  ] as { src: string; alt: string; video?: boolean }[],
 
   // Background music (no player is shown). Put the file in public/audio and set its path here; '' turns it off.
   music: 'audio/music.mp3',

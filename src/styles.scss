@@ -169,7 +169,8 @@ h1, h2, h3, p { margin: 0; }
   img { position: absolute; inset: 0; width: 100%; height: 100%; }
   .bg { object-fit: cover; filter: blur(26px) brightness(.9); transform: scale(1.15); }
   .fg { object-fit: contain; }
-  &.on .fg { animation: slowzoom 6s ease-out both; } }
+  &.vid { background: #2f2a26; video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; } }
+  &.on:not(.vid) .fg { animation: slowzoom 6s ease-out both; } }
 @keyframes slowzoom { from { transform: scale(1); } to { transform: scale(1.045); } }
 .frame .count { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); z-index: 2; padding: 4px 14px; border-radius: 20px;
   background: rgba(47, 42, 38, .5); color: #fff; font: 700 .68rem var(--sans); letter-spacing: .3em; backdrop-filter: blur(4px); }
@@ -180,7 +181,7 @@ h1, h2, h3, p { margin: 0; }
 @media (max-width: 760px) { .frame { aspect-ratio: 4 / 5; } .nav-btn { width: 38px; height: 38px; margin-top: -19px; font-size: 1.5rem; &.prev { left: 14px; } &.next { right: 14px; } } }
 .lightbox {
   position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: rgba(20, 18, 16, .93); animation: fade .2s ease;
-  img { max-width: 88vw; max-height: 86vh; border: 6px solid #fffefb; box-shadow: 0 10px 50px #000; }
+  img, video { max-width: 88vw; max-height: 86vh; border: 6px solid #fffefb; box-shadow: 0 10px 50px #000; background: #000; }
   .lb-btn { position: absolute; background: none; border: 0; color: var(--cream); cursor: pointer; font-size: 3rem; line-height: 1; padding: 12px 18px; opacity: .8;
     &:hover { opacity: 1; color: var(--gold); }
     &.close { top: 8px; right: 12px; font-size: 2.6rem; }
